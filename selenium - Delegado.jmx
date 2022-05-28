@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Plan de Pruebas" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="selenium - Delegado" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Controlador Bucle" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.ChromeDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig" testname="jp@gc - Chrome Driver Config" enabled="true">
+          <stringProp name="WebDriverConfig.proxy_type">SYSTEM</stringProp>
+          <stringProp name="WebDriverConfig.proxy_pac_url"></stringProp>
+          <stringProp name="WebDriverConfig.http_host"></stringProp>
+          <intProp name="WebDriverConfig.http_port">8080</intProp>
+          <boolProp name="WebDriverConfig.use_http_for_all_protocols">true</boolProp>
+          <stringProp name="WebDriverConfig.https_host"></stringProp>
+          <intProp name="WebDriverConfig.https_port">8080</intProp>
+          <stringProp name="WebDriverConfig.ftp_host"></stringProp>
+          <intProp name="WebDriverConfig.ftp_port">8080</intProp>
+          <stringProp name="WebDriverConfig.socks_host"></stringProp>
+          <intProp name="WebDriverConfig.socks_port">8080</intProp>
+          <stringProp name="WebDriverConfig.no_proxy">localhost</stringProp>
+          <boolProp name="WebDriverConfig.maximize_browser">true</boolProp>
+          <boolProp name="WebDriverConfig.reset_per_iteration">false</boolProp>
+          <boolProp name="WebDriverConfig.dev_mode">false</boolProp>
+          <stringProp name="ChromeDriverConfig.chromedriver_path">C:\Users\Usuario 1\IdeaProjects\LoginDelegado\src\test\resources\driver\chromedriver.exe</stringProp>
+          <boolProp name="ChromeDriverConfig.android_enabled">false</boolProp>
+          <boolProp name="ChromeDriverConfig.headless_enabled">false</boolProp>
+          <boolProp name="ChromeDriverConfig.insecurecerts_enabled">false</boolProp>
+          <boolProp name="ChromeDriverConfig.incognito_enabled">false</boolProp>
+          <boolProp name="ChromeDriverConfig.no_sandbox_enabled">false</boolProp>
+        </com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig>
+        <hashTree/>
+        <com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler guiclass="com.googlecode.jmeter.plugins.webdriver.sampler.gui.WebDriverSamplerGui" testclass="com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler" testname="jp@gc - WebDriver Sampler" enabled="true">
+          <stringProp name="WebDriverSampler.script">WDS.sampleResult.sampleStart()
+WDS.browser.get(&apos;https://delegadospresidenciaapp.registraduria.gov.co/&apos;)
+var pkg = JavaImporter(org.openqa.selenium);
+var usuario = WDS.browser.findElement(pkg.By.id(&apos;username&apos;));
+usuario.sendKeys([&apos;${usuario}&apos;]);
+var pass = WDS.browser.findElement(pkg.By.id(&apos;password&apos;));
+pass.sendKeys([&apos;${pass}&apos;]);
+var ingresar = WDS.browser.findElement(pkg.By.cssSelector(&apos;#root &gt; div &gt; main &gt; div.MuiBox-root.css-ac6k0o &gt; div &gt; button&apos;));
+ingresar.click();
+java.lang.Thread.sleep(4000);
+var aceptar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;Aceptar&quot;)]&apos;));
+aceptar.click();
+java.lang.Thread.sleep(4000);
+var pregunta1 = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div[2]/form/fieldset/div/label[1]/span[1]/input&apos;));
+pregunta1.click();
+java.lang.Thread.sleep(3000);
+var guardar1 = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+guardar1.click();
+java.lang.Thread.sleep(3000);
+var confirmar1 = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]/h6&apos;));
+confirmar1.click();
+
+java.lang.Thread.sleep(3000);
+WDS.browser.executeScript(&apos;window.scrollTo(0, 350);&apos;)
+var continuar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;CONTINUAR&quot;)]&apos;));
+continuar.click();
+java.lang.Thread.sleep(3000);
+var informePuesto = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;Informes del puesto&quot;)]&apos;));
+informePuesto.click();
+java.lang.Thread.sleep(3000);
+var aperturaPuesto = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;Apertura del puesto&quot;)]&apos;));
+aperturaPuesto.click();
+java.lang.Thread.sleep(3000);
+var kitElectoral = WDS.browser.findElement(pkg.By.id(&apos;Buen estado&apos;));
+kitElectoral.click();
+WDS.browser.executeScript(&apos;window.scrollTo(0, 350);&apos;)
+java.lang.Thread.sleep(3000);
+var kitElectoralGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+kitElectoralGuardar.click();
+java.lang.Thread.sleep(3000);
+var kitElectoralConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]/h6&apos;));
+kitElectoralConfirmar.click();
+java.lang.Thread.sleep(3000);
+var abrioPuesto = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/div/label[1]/span[1]/input&apos;));
+abrioPuesto.click();
+java.lang.Thread.sleep(3000);
+var abrioPuestoGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+abrioPuestoGuardar.click();
+java.lang.Thread.sleep(3000);
+var abrioPuestoConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+abrioPuestoConfirmar.click();
+java.lang.Thread.sleep(3000);
+var llegaronJuradosVotacion = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/div[1]/div/label[1]/span[1]/input&apos;));
+llegaronJuradosVotacion.click();
+java.lang.Thread.sleep(3000);
+var huboRemplazo = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/div[2]/div[1]/label[2]/span[1]/input&apos;));
+huboRemplazo.click();
+java.lang.Thread.sleep(3000);
+var huboRemplazoGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+huboRemplazoGuardar.click();
+java.lang.Thread.sleep(3000);
+var huboRemplazoConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+huboRemplazoConfirmar.click();
+java.lang.Thread.sleep(3000);
+var presenciaJusticia = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/form/fieldset/div/label[2]/span[1]/input&apos;));
+presenciaJusticia.click();
+java.lang.Thread.sleep(3000);
+var presenciaJusticiaguardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+presenciaJusticiaguardar.click();
+java.lang.Thread.sleep(3000);
+var presenciaJusticiaConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+presenciaJusticiaConfirmar.click();
+java.lang.Thread.sleep(3000);
+var inicioVotaciones = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div[2]/form/fieldset/div/label[1]/span[1]/input&apos;));
+inicioVotaciones.click();
+java.lang.Thread.sleep(3000);
+var inicioVotacionesGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+inicioVotacionesGuardar.click();
+java.lang.Thread.sleep(3000);
+var inicioVotaciones = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+inicioVotaciones.click();
+java.lang.Thread.sleep(3000);
+
+//reporte
+var informePuesto1 = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;Informes del puesto&quot;)]&apos;));
+informePuesto1.click();
+java.lang.Thread.sleep(3000);
+var reporte = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;1 Reporte de votantes&quot;)]&apos;));
+reporte.click();
+java.lang.Thread.sleep(3000);
+var mesa = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div[2]/div/div/a&apos;));
+mesa.click();
+java.lang.Thread.sleep(3000);
+var cantidadVotos = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div[1]/form/div/div/input&apos;));
+cantidadVotos.sendKeys([&apos;100&apos;]);
+java.lang.Thread.sleep(3000);
+var cantidadVotosSi = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div[2]/button[1]&apos;));
+cantidadVotosSi.click();
+java.lang.Thread.sleep(3000);
+var reporteGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+reporteGuardar.click();
+java.lang.Thread.sleep(3000);
+var reporteConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+reporteConfirmar.click();
+java.lang.Thread.sleep(3000);
+
+//Cierre de puesto
+var informePuesto2 = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;Informes del puesto&quot;)]&apos;));
+informePuesto2.click();
+java.lang.Thread.sleep(3000);
+var cierrePuesto = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;Cierre del puesto&quot;)]&apos;));
+cierrePuesto.click();
+java.lang.Thread.sleep(3000);
+var tarjetaBraille = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/div/label[1]/span[1]/input&apos;));
+tarjetaBraille.click();
+var tarjetaBrailleGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+tarjetaBrailleGuardar.click();
+java.lang.Thread.sleep(3000);
+var tarjetaBrailleConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+tarjetaBrailleConfirmar.click();
+java.lang.Thread.sleep(3000);
+var PlanPuntilla = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/div/label[1]/span[1]/input&apos;));
+PlanPuntilla.click();
+java.lang.Thread.sleep(3000);
+var PlanPuntillaGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+PlanPuntillaGuardar.click();
+java.lang.Thread.sleep(3000);
+var PlanPuntillaConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+PlanPuntillaConfirmar.click();
+java.lang.Thread.sleep(3000);
+var EntregaPliegos = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div[2]/form/fieldset/div/label[1]/span[1]/input&apos;));
+EntregaPliegos.click();
+java.lang.Thread.sleep(3000);
+var EntregaPliegosGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+EntregaPliegosGuardar.click();
+java.lang.Thread.sleep(3000);
+var EntregaPliegosConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+EntregaPliegosConfirmar.click();
+java.lang.Thread.sleep(3000);
+var recoleccionUrnas = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div[2]/form/fieldset/div/label[1]/span[1]/input&apos;));
+recoleccionUrnas.click();
+java.lang.Thread.sleep(3000);
+var recoleccionUrnasGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+recoleccionUrnasGuardar.click();
+java.lang.Thread.sleep(3000);
+var recoleccionUrnasConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+recoleccionUrnasConfirmar.click();
+java.lang.Thread.sleep(3000);
+var aseo = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/div[1]/label[1]/span[1]/input&apos;));
+aseo.click();
+WDS.browser.executeScript(&apos;window.scrollTo(0, 350);&apos;)
+java.lang.Thread.sleep(3000);
+var aseoObservacion = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;q9Text&quot;]&apos;));
+aseoObservacion.sendKeys([&apos;pruebas jmeter&apos;]);
+java.lang.Thread.sleep(3000);
+var aseoGuardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+aseoGuardar.click();
+java.lang.Thread.sleep(3000);
+var aseoConfirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+aseoConfirmar.click();
+java.lang.Thread.sleep(3000);
+var estrellas = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/span[1]/label[5]&apos;));
+estrellas.click();
+java.lang.Thread.sleep(3000);
+var estrellas1 = WDS.browser.findElement(pkg.By.xpath(&apos;//*[@id=&quot;root&quot;]/div/main/div/form/fieldset/span[2]/label[3]&apos;));
+estrellas1.click();
+WDS.browser.executeScript(&apos;window.scrollTo(0, 350);&apos;)
+java.lang.Thread.sleep(3000);
+var estrellas1Guardar = WDS.browser.findElement(pkg.By.xpath(&apos;//*[contains(text(),&quot;GUARDAR&quot;)]&apos;));
+estrellas1Guardar.click();
+java.lang.Thread.sleep(3000);
+var estrellas1Confirmar = WDS.browser.findElement(pkg.By.xpath(&apos;/html/body/div[2]/div[3]/div/div/button[1]&apos;));
+estrellas1Confirmar.click();
+java.lang.Thread.sleep(3000);
+
+WDS.sampleResult.sampleEnd()
+</stringProp>
+          <stringProp name="WebDriverSampler.parameters"></stringProp>
+          <stringProp name="WebDriverSampler.language">javascript</stringProp>
+        </com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Configuración del CSV Data Set" enabled="true">
+          <stringProp name="filename">C:\Users\Usuario 1\Desktop\data.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <stringProp name="delimiter">;</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Ver Árbol de Resultados" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Reporte resumen" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
